@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Signup = (props) => {
+
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cpassword: "" })
     let navigate = useNavigate();
     
@@ -21,15 +22,20 @@ const Signup = (props) => {
             body: JSON.stringify({name, email, password})
         });
         const json = await response.json()
-        console.log(json.success);
-        
-            localStorage.setItem('token', json.authtoken);
+        console.log(json);
+        if (json.success){
+            // Save the auth token and redirect
+            localStorage.setItem('token', json.authtoken); 
             navigate("/");
-            props.showAlert(`Account created successfully! Welcome, ${json.name}`, "success");        
+            props.showAlert(`Logged in successfully! Welcome, ${json.name}`, "success")
+        }
+        else{
+            props.showAlert("Invalid Credentials", "danger")
+        }
     }
 
     return (
-        <div className='mt-5'>
+        <div className='mt-5' style={{color: props.mode==='dark'?'white':'black'}}>
             <h2 className='container text-center'>Signup</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">

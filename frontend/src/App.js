@@ -9,6 +9,8 @@ import { useState } from 'react';
 
 function App() {
   const [alert,setAlert] = useState(null);
+  const [mode, setMode] = useState('light');
+
   const showAlert = (message, type) => {
     setAlert({
       msg: message,
@@ -18,14 +20,28 @@ function App() {
       setAlert(null)
     }, 2000);
   }
+
+  const toggleMode = ()=>{
+    if(mode==='light'){
+      setMode ('dark');
+      document.body.style.backgroundColor = '#1D2A35';
+      showAlert("Dark mode enabled.", "success");
+    }
+    else{
+      setMode('light');
+      document.body.style.backgroundColor = 'white';
+      showAlert("Light mode enabled.", "success");
+    }
+  }
+
   return (
     <>
         <Router>
-          <Navbar showAlert={showAlert}/>
+          <Navbar showAlert={showAlert} mode={mode} toggleMode = {toggleMode}/>
           <div className="container">
           <Alert alert={alert} />
             <Routes>
-              <Route exact path="/" element={<Home/>} showAlert={showAlert}/>
+              <Route exact path="/" element={<Home/>} showAlert={showAlert} />
               <Route exact path="/login" element={<Login showAlert={showAlert} />} />
               <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
             </Routes>

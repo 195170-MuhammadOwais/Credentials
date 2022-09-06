@@ -13,8 +13,8 @@ function Navbar(props) {
 
 
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div style={{color: props.mode==='dark'?'white':'black'}}>
+            <nav className={`navbar fixed-top navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">React-Task</Link>
                     <Link className="navbar-brand" to="/">Home</Link>
@@ -26,17 +26,20 @@ function Navbar(props) {
 
                         {!localStorage.getItem('token') ?
                             <form className='d-flex'>
-                                <Link to="/login" className={`btn btn-outline-light mx-2 ${location.pathname === "/login" ? "active" : ""}`} >Login</Link>
-                                <Link to="/signup" className={`btn btn-outline-light ${location.pathname === "/signup" ? "active" : ""}`} >Sign Up</Link>
+                                <div className={`form-check form-switch mx-2 my-2 text-${props.mode === 'light' ? 'dark' : 'light'}`}>
+                                    <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={props.toggleMode}
+                                        style={{ cursor: 'pointer' }} />
+                                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark mode</label>
+                                </div>
+                                <Link to="/login" className={`btn btn-dark mx-2 ${location.pathname === "/login" ? "active" : ""} text-outline-${props.mode === 'light' ? 'dark' : 'light'} `} >Login</Link>
+                                <Link to="/signup" className={`btn btn-dark ${location.pathname === "/signup" ? "active" : ""} text-outline-${props.mode === 'light' ? 'dark' : 'light'} `} >Sign Up</Link>
                             </form> :
-                            <Link to="/login" onClick={handleLogout} className={`btn btn-outline-light ${location.pathname === "/logout" ? "active" : ""}`} >Logout</Link>
+                            <Link to="/login" onClick={handleLogout} className={`btn btn-dark ${location.pathname === "/logout" ? "active" : ""} text-outline-${props.mode === 'light' ? 'dark' : 'light'} `} >Logout</Link>
                         }
 
                     </div>
                 </div>
             </nav>
-
-
         </div>
     )
 }

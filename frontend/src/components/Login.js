@@ -2,8 +2,7 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login = (props) => {
-    
-    const [credentials, setCredentials] = useState({email: "", password: ""}) 
+    const [credentials, setCredentials] = useState({email: "", password: ""})
     let navigate = useNavigate();
 
     const onChange = (e)=>{
@@ -34,7 +33,7 @@ const Login = (props) => {
 
 
     return (
-        <div className='mt-5'>
+        <div className='mt-5' style={{color: props.mode==='dark'?'white':'black'}}>
             <h2 className='container text-center'>Login</h2>
             <form  onSubmit={handleSubmit}>
                 <div className="mb-3">
