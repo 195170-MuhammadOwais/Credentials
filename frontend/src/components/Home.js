@@ -1,8 +1,8 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel';
+import Footer from './Footer'
 
 function Home(props) {
-  
   return (
     <div className='container text-center' style={{color: props.mode==='dark'?'white':'black'}}>
       <h2 className='mt-5 my-4'>Home</h2>
@@ -44,7 +44,7 @@ function Home(props) {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-
+      <Footer />
     </div>
   )
 }
